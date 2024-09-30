@@ -15,5 +15,10 @@ export const registeredUsers:UserType[] = [
         name: "Ringo",
         category: "Vegan",
         savedRecipes: []
+    },
+    {
+        name: "peter",
+        category: "vegan",
+        savedRecipes: [] 
     }
 ]

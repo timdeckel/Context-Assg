@@ -7,6 +7,8 @@ export type UserType = {
 export type UserContextType = {
     user: UserType | null,
     setUser: (user:UserType) => void
+    saveRecipe: (recipe: string) => void;
+    removeRecipe: (recipe: string) => void;
 }
 
 export type RecipeType = {
@@ -16,9 +18,15 @@ export type RecipeType = {
     strMealThumb: string,
     strArea?: string,
     strInstructions?: string,
-
 }
 
+export type CategoryType = {
+    map(arg0: (category: CategoryType) => import("react").JSX.Element): import("react").ReactNode
+    idCategory: string,
+    strCategory: string,
+    strCategoryThumb: string,
+    strCategoryDescription: string,
+}
 
 
 // name = data.strMeal

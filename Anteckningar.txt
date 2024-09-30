@@ -1,0 +1,6 @@
+1. göra favorite/unfavorite knapparna till egna komponenter
+2. fixa utloggning.
+3. ladda ner users data från local storage vid inlogning
+4. kunna byta/välja favorite kategori
+5. samla fetch på samma plats
+6. skriv om profile page så att home page recept versionen visas. 
