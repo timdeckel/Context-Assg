@@ -8,12 +8,10 @@ export const UserProvider = ({children}:{children:React.ReactNode}) => {
     const [user, setUser] = useState<UserType | null>(null)
 
     const saveRecipe = (recipe: string) => {
-        //user?.savedRecipes.push(recipe);
         if (user) {
             setUser({
                 ...user,
                 savedRecipes: [...user.savedRecipes, recipe],
-            
             });
         }
     };
@@ -31,14 +29,18 @@ export const UserProvider = ({children}:{children:React.ReactNode}) => {
         }
     }
 
-    /*let removeRecipeIndex = user.savedRecipes.indexOf(recipe)
-            if(removeRecipeIndex > -1 ) {
-              user.savedRecipes.splice(removeRecipeIndex, 1);
-            }
-            
-        } */
+    const selectFavoriteCategory = (newCategory: string) => {
+        if (user && user.category !== newCategory) {
+            setUser({
+                ...user,
+                category: newCategory,
+            })
+        }
+    }
+
+
     return (
-        <UserContext.Provider value={{user, setUser, saveRecipe, removeRecipe}}>
+        <UserContext.Provider value={{user, setUser, saveRecipe, removeRecipe, selectFavoriteCategory}}>
             {children}
         </UserContext.Provider>
     )

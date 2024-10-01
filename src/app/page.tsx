@@ -28,10 +28,15 @@ export default function Home() {
     fetchRecipes();
   }, [])
 
+  const checkUser = () => {
+    console.log(user)
+  }
+  
   return (
     <>
     {user && (
   <div className="">
+    <button onClick={checkUser}>kolla user värdet</button>
     Your favorite category of food is {user.category}
 
     {recipes && recipes.map((meal: RecipeType) => (

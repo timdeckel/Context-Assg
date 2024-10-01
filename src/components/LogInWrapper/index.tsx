@@ -1,12 +1,17 @@
 'use client'
 
 import { useUserContext } from "@/utils/contexts"
-import { UserContextType } from "@/utils/types"
+import { UserContextType, UserType } from "@/utils/types"
+import { useRouter } from "next/router"
+
+
 import LogIn from "../Login"
 import Menu from "../Menu"
 
 const LogInWrapper = ({children}:{children:React.ReactNode}) => {
-    const {user} = useUserContext() as UserContextType;
+    const {user} = useUserContext() as UserContextType
+    
+
     return (
         <div>
             {!user ? <LogIn/> : (

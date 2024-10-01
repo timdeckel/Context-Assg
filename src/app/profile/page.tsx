@@ -4,15 +4,12 @@ import { RecipeType } from "@/utils/types"
 import { useEffect, useState } from "react"
 import { useUserContext } from "@/utils/contexts";
 import { UserContextType } from "@/utils/types";
-
-
+import Link from "next/link";
 
 const profile = ({params}: {params: {id:string}}) => {
-    const { user, saveRecipe, removeRecipe} = useUserContext() as UserContextType;
+    const { user, removeRecipe} = useUserContext() as UserContextType;
     const {id} = params
     const [favorteRecipes, setFavorteRecipes] = useState<RecipeType[]>([]);
-
-    
 
     useEffect( () => {
         const fetchRecipes = async () => {
@@ -35,23 +32,33 @@ const profile = ({params}: {params: {id:string}}) => {
         fetchRecipes();
       }, [user])
 
+      useEffect(() => {
+        if (user) {
+          localStorage.setItem(user.name, JSON.stringify(user));
+          console.log("LocalStorage updated with new user data:", user);
+        }
+      }, [user?.savedRecipes]); 
+
+      const handleRemoveRecipe = async (recipeId: string) => {
+          await removeRecipe(recipeId);
+          console.log("Recipe removed from context");
+      }
+  
     return (
     <>
         <h1>Profile page</h1>
         <p>Welcome {user?.name}</p>
         <p>This is your favorite category: {user?.category}</p>
         <p>These are your favorite recipes</p>
-        {favorteRecipes && favorteRecipes.map((item, index) => <div key={index}>
-               <p>{item.strMeal}</p> 
-               <img height="auto" width="200" src={item.strMealThumb}></img>
-               {/* {user?.savedRecipes.includes(item.idMeal) ?
-                  <button onClick={handleRemoveRecipe}> Unfavorite recipe. </button>
-               : (<button onClick={handleSaveRecipe}> Favorite recipe. </button>
-
-               )} */}
-               
-               <p>{item.strInstructions}</p>
-                </div>)}
+        {favorteRecipes && favorteRecipes.map((item, index) => 
+            <div key={index}>
+                <Link href={`/recipe/${item.idMeal}`}>{item.strMeal}
+                </Link>
+                <img height="auto" width="200" src={item.strMealThumb}></img>
+                <button onClick={() => handleRemoveRecipe(item.idMeal)}> Unfavorite recipe. </button>
+                <p>{item.strInstructions?.slice(0,200)}</p>
+            </div>
+        )}
     </>
     )
 }

@@ -6,9 +6,8 @@ import { useEffect, useState } from "react"
 import { CategoryType } from "@/utils/types"
 import Link from "next/link"
 
-
 const category = ({children}:{children:React.ReactNode}) => {
-    const {user} = useUserContext() as UserContextType;
+    const {user, selectFavoriteCategory} = useUserContext() as UserContextType;
      
     const [categories, setCategories] = useState<CategoryType[]>([]);
   
@@ -26,10 +25,25 @@ const category = ({children}:{children:React.ReactNode}) => {
         }
         
       }
-
       fetchRecipes();
-
     }, [])
+
+    const handleFavCategory = async (category: string) => {
+      console.log(category)
+      if(user?.category !== category){
+        await selectFavoriteCategory(category)
+        console.log("kategori bytt i context");
+
+      }
+    }
+
+    useEffect(() => {
+      console.log("i kategori useEff, "+ user?.category)
+      if (user) {
+        localStorage.setItem(user.name, JSON.stringify(user));
+        console.log("LocalStorage updated with new user data:", user);
+      }
+    }, [user?.category]); 
 
     return (
         <div>
@@ -37,8 +51,8 @@ const category = ({children}:{children:React.ReactNode}) => {
             {categories.length > 0 ? (
                 categories.map((category: CategoryType) => (
                 <div key={category.idCategory}> 
-                    <Link href={`/category/${category.strCategory}`}>{category.strCategory}
-                    </Link>
+                    <Link href={`/category/${category.strCategory}`}>{category.strCategory}</Link>
+                    <button onClick={() => handleFavCategory(category.strCategory)}>Favorite</button>
                 </div>
                 ))
             ) : (
