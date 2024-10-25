@@ -66,6 +66,7 @@ const recipePage = ({params}: {params: {id:string}}  ) => {
                )}
                
                <p>{recipe.strInstructions}</p>
+               <p>här ska ingredienserna vara</p>
                 </div>)}
         </div>
     )

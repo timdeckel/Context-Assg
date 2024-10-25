@@ -8,7 +8,7 @@ import Menu from "../Menu"
 const LogInWrapper = ({children}:{children:React.ReactNode}) => {
     const {user} = useUserContext() as UserContextType;
     return (
-        <div>
+        <div className="flex flex-col w-full h-full items-center justify-center">
             {!user ? <LogIn/> : (
                 <>
                 <Menu/>
