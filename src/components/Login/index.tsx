@@ -39,7 +39,7 @@ const LogIn = () => {
 
     
     return (
-        <div>
+        <div className="flex flex-col p-5">
             <p>To log in please use your user name</p>
             <label htmlFor="user-input">Enter user name</label>
             <input id="user-input" onChange={handleChange}></input>

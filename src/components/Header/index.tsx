@@ -12,9 +12,10 @@ const Header = () => {
     }
 
     return (
-            <header>
-                <h1>Recipe finder</h1>
-                <button onClick={logout}>Log out</button>
+            <header className="">
+                <h1 className="bg-blue-300" >Recipe finder</h1>
+                {!user ? "" : (<button onClick={logout}>Log out</button>)}
+                
            </header>
     )
 }
