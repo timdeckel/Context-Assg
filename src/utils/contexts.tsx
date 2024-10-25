@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { UserContextType, UserType } from './types';
 
 const UserContext = createContext<UserContextType | null>(null)
@@ -31,12 +31,6 @@ export const UserProvider = ({children}:{children:React.ReactNode}) => {
         }
     }
 
-    /*let removeRecipeIndex = user.savedRecipes.indexOf(recipe)
-            if(removeRecipeIndex > -1 ) {
-              user.savedRecipes.splice(removeRecipeIndex, 1);
-            }
-            
-        } */
     return (
         <UserContext.Provider value={{user, setUser, saveRecipe, removeRecipe}}>
             {children}

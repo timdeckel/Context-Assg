@@ -25,33 +25,33 @@ const recipePage = ({params}: {params: {id:string}}  ) => {
         }
         fetchRecipes();
       }, [])
-      
+
       const handleSaveRecipe = () => {
         if(user){
-          if( recipe && !user.savedRecipes.includes(recipe.idMeal)){
-            saveRecipe(recipe.idMeal); 
-            let username = user.name
-            localStorage.setItem(username ,JSON.stringify(user))
-          } else {
+          if(recipe && !user.savedRecipes.includes(recipe.idMeal)) {
+            saveRecipe(recipe.idMeal);
+          }else {
             console.log(recipe?.idMeal +" finns redan, här är hela listan på users recept: " + user.savedRecipes )
           }
         }
       };
 
-      useEffect(() => { // denna är här för att se updateringen i user.
-        console.log("Updated saved recipes: ", user?.savedRecipes);
-        console.log("värdet i user, name: " + user?.name + " category: " + user?.category)
-      }, [user?.savedRecipes]);
-
       const handleRemoveRecipe = () => {
         if(user){
-          if( recipe && user.savedRecipes.includes(recipe.idMeal)){
-            removeRecipe(recipe.idMeal)
-            let username = user.name
-            localStorage.setItem(username ,JSON.stringify(user))
-          } 
+          if(recipe && user.savedRecipes.includes(recipe.idMeal)) {
+            removeRecipe(recipe.idMeal);
+          }else {
+            console.log(recipe?.idMeal +" finns redan, här är hela listan på users recept: " + user.savedRecipes )
+          }
         }
       }
+
+     useEffect(() => {
+      console.log(localStorage);
+      console.log("update saved recipes:", user?.savedRecipes);
+      console.log("värdet i user, name:" + user?.name + "category:" + user?.category)
+      user && localStorage.setItem(user.name, JSON.stringify(user))
+     }, [user?.savedRecipes]);
 
     return (
         <div>

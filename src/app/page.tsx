@@ -28,6 +28,7 @@ export default function Home() {
     fetchRecipes();
   }, [])
 
+
   return (
     <>
     {user && (
@@ -44,8 +45,7 @@ export default function Home() {
   </div>
 )}
   
-    
-    </>
+  </>
   
   );
 }

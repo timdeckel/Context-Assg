@@ -6,20 +6,26 @@ import { useUserContext } from "@/utils/contexts"
 
 const LogIn = () => {
     const [userInput, setUserInput] = useState<string | null>(null)
-
-    const {setUser} = useUserContext() as UserContextType
+    const { user, setUser, saveRecipe, removeRecipe} = useUserContext() as UserContextType;
+    //const {user, setUser} = useUserContext() as UserContextType
 
     const handleChange = (e: { target: { value: SetStateAction<string | null> } }) => {
         setUserInput(e.target.value)
     }
 
     const handleClick = () => {
-        const loggedInUser:UserType[] = registeredUsers.filter((user:UserType) => user.name === userInput)
+            const loggedInUser:UserType[] = registeredUsers.filter((user:UserType) => user.name === userInput)
         if (loggedInUser) {
-            console.log(loggedInUser[0])
-            setUser(loggedInUser[0])
+            console.log(localStorage.getItem(loggedInUser[0].name))
+            const userFrom = localStorage.getItem(loggedInUser[0].name)
+            if(userFrom) {
+                setUser(JSON.parse(userFrom))
+            }else {
+                setUser(loggedInUser[0])
+            }
         }
     }
+    
     return (
         <div className="flex flex-col bg-baseAccent w-full h-full gap-4 p-6 items-center">
             <p className="text-3xl">Login</p>

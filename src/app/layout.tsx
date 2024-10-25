@@ -31,8 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base flex flex-col items-center `}
       >
-        <Header/>
+        
         <UserProvider>
+        <Header/>
           <LogInWrapper children={children}/>
         </UserProvider>
         

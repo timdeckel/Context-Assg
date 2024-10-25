@@ -1,3 +1,11 @@
+1.Gör en component för knappar, save recepie, delite
+2. Hämta ner user data
+3.Fixa utloggning
+4. Kunna byta/välja favorit kategori
+5. Samla fetch på samma plats
+6. Skriv om profile page så att home page recept version visas. 
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
