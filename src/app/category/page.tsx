@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import { CategoryType } from "@/utils/types"
 import Link from "next/link"
 
-const category = ({children}:{children:React.ReactNode}) => {
+const category = () => {
     
   const { user, changeFavoriteCategory } = useUserContext() as UserContextType;
   const [categories, setCategories] = useState<CategoryType[]>([]);
@@ -53,7 +53,6 @@ const category = ({children}:{children:React.ReactNode}) => {
             <p>Loading categories...</p> 
           )}
           </div>
-          {children}
         </div>
   )
 }
