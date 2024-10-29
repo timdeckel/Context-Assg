@@ -8,13 +8,18 @@ export const UserProvider = ({children}:{children:React.ReactNode}) => {
     const [user, setUser] = useState<UserType | null>(null)
 
     const saveRecipe = (recipe: string) => {
-        //user?.savedRecipes.push(recipe);
         if (user) {
             setUser({
                 ...user,
                 savedRecipes: [...user.savedRecipes, recipe],
             
             });
+        }
+    };
+
+    const changeFavoriteCategory = (newCategory: string) => {
+        if (user && user.category !== newCategory) {
+            setUser({ ...user, category: newCategory})
         }
     };
 
@@ -32,7 +37,7 @@ export const UserProvider = ({children}:{children:React.ReactNode}) => {
     }
 
     return (
-        <UserContext.Provider value={{user, setUser, saveRecipe, removeRecipe}}>
+        <UserContext.Provider value={{user, setUser, saveRecipe, removeRecipe, changeFavoriteCategory}}>
             {children}
         </UserContext.Provider>
     )

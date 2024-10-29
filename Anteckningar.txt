@@ -1,2 +1,1 @@
-fixa ingredienserna med mått osv
-stylea
+Fixa så man kan byta favorit kategori

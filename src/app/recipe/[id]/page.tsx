@@ -9,6 +9,8 @@ const recipePage = ({params}: {params: {id:string}}  ) => {
     const { user, saveRecipe, removeRecipe} = useUserContext() as UserContextType;
     const {id} = params
     const [recipe, setRecipe] = useState<RecipeType | null>(null)
+    const [ingredients, setIngredients] = useState<string[]>([]);
+  
 
     useEffect( () => {
         const fetchRecipes = async () => {
@@ -16,8 +18,9 @@ const recipePage = ({params}: {params: {id:string}}  ) => {
             if (id) {
               const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
               const data = await response.json();
-            //console.log(data)
-            setRecipe(data.meals[0])
+              //console.log(data.meals[0].strInstructions)
+              getIngredients(data.meals[0])
+              setRecipe(data.meals[0])
             }
           }catch (error){
             console.log(error)
@@ -25,6 +28,21 @@ const recipePage = ({params}: {params: {id:string}}  ) => {
         }
         fetchRecipes();
       }, [])
+
+      const getIngredients = (data: any) => {
+        console.log("getIng data: " + data)
+        let ingredients: string[] = [];
+        for (let index = 1; index < 20; index++) {
+          let ingredientKey = `strIngredient${index}`; 
+          let measurmentKey = `strMeasure${index}`;
+          const ingredient = data[ingredientKey];
+          const measure = data[measurmentKey];
+          if(data[ingredientKey] !== ""){
+            ingredients.push( ingredient + ", " + measure );
+          }
+        }
+        setIngredients(ingredients)
+      }
 
       const handleSaveRecipe = () => {
         if(user){
@@ -54,20 +72,22 @@ const recipePage = ({params}: {params: {id:string}}  ) => {
      }, [user?.savedRecipes]);
 
     return (
-        <div>
-            <p>Hello from the recipe page id is {id}</p>
+        <div className="p-4">
             {recipe && (<div>
                <p>{recipe.strMeal}</p> 
                <img height="auto" width="200" src={recipe.strMealThumb}></img>
                {user?.savedRecipes.includes(recipe.idMeal) ?
-                  <button onClick={handleRemoveRecipe}> Unfavorite recipe. </button>
-               : (<button onClick={handleSaveRecipe}> Favorite recipe. </button>
-
+                  <button className="p-2 bg-baseLight rounded my-2" onClick={handleRemoveRecipe}> Unfavorite recipe. </button>
+               : (<button className="p-2 bg-baseLight rounded my-2" onClick={handleSaveRecipe}> Favorite recipe. </button>
                )}
-               
                <p>{recipe.strInstructions}</p>
-               <p>här ska ingredienserna vara</p>
-                </div>)}
+               <div className="flex flex-col">
+                <p className="my-2 text-lg">Ingredients.</p>
+                {ingredients && ingredients.map((item) => (
+                  <p>{item}</p>
+                ))}
+               </div>
+              </div>)}
         </div>
     )
 }

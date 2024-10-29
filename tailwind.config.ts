@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'inset-top': 'inset 0 8px 8px -4px rgba(0, 0, 0, 0.2)',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

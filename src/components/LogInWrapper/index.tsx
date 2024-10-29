@@ -7,12 +7,12 @@ import Menu from "../Menu"
 
 const LogInWrapper = ({children}:{children:React.ReactNode}) => {
     const {user} = useUserContext() as UserContextType;
+
     return (
-        <div className="flex flex-col w-full h-full items-center justify-center">
+        <div className="flex flex-col flex-grow w-full h-full items-center justify-center">
             {!user ? <LogIn/> : (
                 <>
                 <Menu/>
-                <p>Hi {user.name}</p>
                 {children}
                 </>
             )}

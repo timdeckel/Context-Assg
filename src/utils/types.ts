@@ -9,6 +9,7 @@ export type UserContextType = {
     setUser: (user:UserType | null) => void
     saveRecipe: (recipe: string) => void;
     removeRecipe: (recipe: string) => void;
+    changeFavoriteCategory: (category: string) => void;
 }
 
 export type RecipeType = {
@@ -27,10 +28,3 @@ export type CategoryType = {
     strCategoryThumb: string,
     strCategoryDescription: string,
 }
-
-
-// name = data.strMeal
-// id = data.idMeal
-// image = data.strMealThumb
-
-// ourRecipe = {...data}
